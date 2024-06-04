@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
-import { UserAgentMiddleware } from './user.middleware';
+import { UserAgentMiddleware } from './products.middleware';
 
 @Module({
   providers: [ProductsService],
