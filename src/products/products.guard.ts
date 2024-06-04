@@ -23,12 +23,12 @@ export class IsAdmin implements CanActivate {
   }
 }
 
-export class UserGuard implements CanActivate {
+export class SafeGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const req: Request = context.switchToHttp().getRequest();
-    console.log(req.headers['user-agent']);
-    return true;
+    const random = Math.random();
+    return random >= 0.5;
   }
 }
