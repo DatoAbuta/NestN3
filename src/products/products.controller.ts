@@ -14,13 +14,13 @@ import {
 import { ProductsService } from './products.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard, IsAdmin } from './user.guard';
+import { AuthGuard, IsAdmin } from './products.guard';
 
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
-  @UseGuards(IsAdmin)
+  @UseGuards(AuthGuard)
   @Get()
   getWithBothQuery(
     @Query('category') category: string,
@@ -34,19 +34,19 @@ export class ProductsController {
     return this.productsService.getExpenseById(id);
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(IsAdmin)
   @Post()
   createProduct(@Body() product: CreateUserDto) {
     return this.productsService.createProduct(product);
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(IsAdmin)
   @Delete('/:id')
   deleteProduct(@Param('id', ParseIntPipe) id) {
     return this.productsService.deleteProduct(id);
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(IsAdmin)
   @Put('/:id')
   updateProduct(
     @Param('id', ParseIntPipe) id: number,
